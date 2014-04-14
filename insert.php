@@ -55,11 +55,11 @@
 	function insertIntoCategories($categoryName)
 	{
 		// Prepare statement for inserting information in actors
-		$stmt_insertCategories = $GLOBALS['mysqli'] -> prepare("INSERT INTO categories (CategoryName) VALUES ( ? )");
+		$stmt_insertCategories = $GLOBALS['mysqli'] -> prepare("INSERT INTO categories (CatName) VALUES ( ? )");
 		$stmt_insertCategories -> bind_param("s", $categoryName);
 		
 		// execute insertion
-		if(!$stmt_insertCategory -> execute())
+		if(!$stmt_insertCategories -> execute())
 		{
 			Echo "Error: Couldn't insert in Categories";
 		}
@@ -69,7 +69,7 @@
 	function insertIntoEvents($categoryId, $adId, $eventName, $eventStart, $eventEnd, $description, $location, $venue, $URLName, $publicity)
 	{
 		// Prepare statement for inserting information in actors
-		$stmt_insertEvents = $GLOBALS['mysqli'] -> prepare("INSERT INTO categories (CategoryId, AdId, EventName, EventStart, EventEnd, Description, Location, Venue, URLName, Publicity) VALUES ( ? , ? , ? , ? , ? , ? , ? , ? , ? , ? )");
+		$stmt_insertEvents = $GLOBALS['mysqli'] -> prepare("INSERT INTO events (CategoryId, AdId, EventName, EventStart, EventEnd, Description, Location, Venue, URLName, Publicity) VALUES ( ? , ? , ? , ? , ? , ? , ? , ? , ? , ? )");
 		$stmt_insertEvents -> bind_param("iissssssss", $categoryId, $adId, $eventName, $eventStart, $eventEnd, $description, $location, $venue, $URLName, $publicity);
 		
 		// do some regex
@@ -144,20 +144,26 @@
 	{
 		// Prepare statement for inserting information in actors
 		$stmt_insertVisits = $GLOBALS['mysqli'] -> prepare("INSERT INTO visits (Page, IP, TARDIS) VALUES ( ? , ? , CURRENT_TIMESTAMP )");
-		$stmt_insertVisits -> bind_param("sss", $page, $ip);
+		$stmt_insertVisits -> bind_param("ss", $page, $ip);
 		
 		// Get ip address
 		$ip = $_SERVER["REMOTE_ADDR"];
 		
 		// execute insertion
-		if(!$stmt_insertUsers -> execute())
+		if(!$stmt_insertVisits -> execute())
 		{
 			Echo "Error: Couldn't insert in visits";
 		}
 	}
 	
 	
-	//insertIntoActors(2,2,2);
-	insertIntoUsers("zoo", "does more farts", "kylling@gmail.com", "yeahright");
+	// [working] insertIntoActors(2,2,2);
+	// [working] insertIntoAds("Kylling", "Kylling.png");
+	// [working] insertIntoCategories("Kyllingefest");
+	// [working] insertIntoEvents(4, 3, "Kullingfest", "2014-01-04 23:32", "2014-03-04 23:32", "kulling", "kullingeby", "KULLINGLAND!", "kulling", 0);
+	// [working] insertIntoPermissions("kulling", 0,1,0);
+	// [working] insertIntoTickets(3, 3, "testing the bee");
+	// [working] insertIntoUsers("zoo", "does more farts", "kylling@gmail.com", "yeahright");
+	// [working] insertIntoVisits("testing insert.php");
 
 ?>
