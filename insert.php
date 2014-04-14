@@ -17,10 +17,7 @@
 		}
 	}
 	
-	
 	$mysqli = new mysqli("localhost", "root", "", "qrproj");
-
-
 	
 	/*** Script that inserts an entity in Actors ***/
 	function insertIntoActors($eventId, $userId, $rankId)
